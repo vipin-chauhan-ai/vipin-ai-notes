@@ -1,0 +1,28 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>FastAPI Day2</title><style>
+body{margin:0;font-family:Arial;background:#eef4ff}.header{background:linear-gradient(90deg,#2563eb,#06b6d4);color:#fff;padding:25px;text-align:center}
+.container{max-width:1000px;margin:auto;padding:20px}.card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.1);margin:20px 0}
+.q{background:#2563eb;color:#fff;padding:10px;border-radius:8px;font-weight:bold}.a{background:#f4fbff;border-left:5px solid #06b6d4;padding:12px;margin:8px 0 15px}
+pre{background:#1e293b;color:#fff;padding:15px;border-radius:8px;overflow:auto}
+</style></head><body>
+<div class="header"><h1>🚀 FastAPI Day 3</h1><p>HTTP • Request • Response • GET Method</p></div>
+<div class="container">
+<div class="card"><h2>Today's Agenda</h2><ul><li>HTTP</li><li>Request</li><li>Response</li><li>Browser → Server Flow</li><li>GET Method</li><li>/student</li><li>/company</li></ul></div>
+<div class="card"><div class="q">What is HTTP?</div><div class="a">HTTP (HyperText Transfer Protocol) is used for communication between the browser and the server.</div>
+<div class="q">What is Request?</div><div class="a">A Request is sent by the client to the server.</div>
+<div class="q">What is Response?</div><div class="a">A Response is returned by the server to the client.</div>
+<div class="q">Browser → Server Flow</div><div class="a">Browser → HTTP Request → Uvicorn → FastAPI → Route → Function → JSON Response → Browser</div>
+<div class="q">GET Method</div><div class="a">GET is used to fetch data from the server.</div></div>
+<div class="card"><h2>Code Example</h2><pre>from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/student")
+def student():
+    return {"name":"Vipin"}
+
+@app.get("/company")
+def company():
+    return {"company":"OpenAI"}</pre></div>
+<div class="card"><h2>Interview Questions</h2><div class="q">URL vs Route</div><div class="a"><b>URL:</b> Browser address<br><b>Route:</b> Endpoint defined in FastAPI.</div>
+<div class="q">Request vs Response</div><div class="a"><b>Request:</b> Client → Server<br><b>Response:</b> Server → Client</div></div>
+</div></body></html>
