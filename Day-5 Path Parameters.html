@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<title></title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f7fb;margin:0;padding:30px}
+.container{max-width:900px;margin:auto;background:#fff;padding:25px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+h1{color:#1e3a8a;border-bottom:3px solid #2563eb;padding-bottom:8px}
+details{margin:12px 0;border:1px solid #d1d5db;border-radius:8px;overflow:hidden}
+summary{background:#2563eb;color:#fff;padding:14px;font-weight:bold;cursor:pointer}
+.content{padding:15px;line-height:1.7}
+ul{margin-top:8px}
+code{background:#eef;padding:2px 4px;border-radius:4px}
+</style></head><body><div class="container"><h1>Day-5 (Path Parameters)</h1><details><summary>1. What is a Path Parameter?</summary><div class='content'>A Path Parameter is a dynamic value that is passed inside the URL path. It is mainly used to identify a specific resource such as a student, product, user, or order.<br>Example-<br>/student/10</div></details><details><summary>What is the use of Path Parameter?</summary><div class='content'>Path Parameters are mainly used to retrieve a specific resource.<br>Examples<br>/student/10<br>/product/100<br>/user/25<br>/order/500</div></details><details><summary>Path Parameter vs Query Parameter?</summary><div class='content'>Example<br>Path Parameter- /student/10<br>Query Parameter- /students?course=AI<br>Data Type Validation<br>@app.get("/student/{id}")<br>def get_student(id: int):<br>here - id: int</div></details><details><summary>Why 422 Validation Error?</summary><div class='content'>FastAPI uses Pydantic to validate incoming request data.<br>If the client sends invalid data,</div></details><details><summary>Why does FastAPI return 422 Validation Error?</summary><div class='content'>FastAPI returns 422 Unprocessable Entity when the client sends invalid data that does not match the expected data type or validation rules defined in the application.<br>Key Points Path Parameters<br>Path Parameters are part of the URL.<br>Used to access a specific resource.<br>FastAPI automatically validates data types.<br>Invalid values return 422 Validation Error.<br>Path Parameters are commonly used with GET, PUT, DELETE APIs.</div></details></div></body></html>
