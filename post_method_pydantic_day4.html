@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>FastAPI Day-4 Notes</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f6f9;margin:0}
+header{background:#0B4F8A;color:#fff;padding:20px;text-align:center}
+.container{max-width:1000px;margin:20px auto}
+details{background:#fff;margin:12px 0;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+summary{padding:16px;font-size:18px;font-weight:bold;cursor:pointer;background:#eaf2fb}
+.content{padding:18px;line-height:1.7}
+pre{background:#222;color:#eee;padding:12px;border-radius:6px;overflow:auto}
+table{width:100%;border-collapse:collapse}th,td{border:1px solid #ddd;padding:10px}
+th{background:#0B4F8A;color:#fff}
+</style></head><body>
+<header><h1>FastAPI Day-4</h1><h3>POST Method • Request Body • Pydantic • BaseModel</h3></header>
+<div class="container">
+<details open><summary>1. What is POST Method?</summary><div class='content'><p>POST is an HTTP request method used to send data from the client to the server for creating a new resource or submitting information for processing.</p><p>Unlike the GET method, POST transmits data through the request body instead of appending it to the URL.</p><p>POST Request -&gt; FastAPI Server -&gt; Validate Data  -&gt;  Business Logic   -&gt;  Database  -&gt;  Response  -&gt; Client</p></div></details><details open><summary>2. GET vs POST</summary><div class='content'></div></details><details open><summary>3. What is Request Body?</summary><div class='content'><p>A Request Body is the section of an HTTP request that carries data from the client to the server.</p><p>This data is commonly represented in JSON format when working with REST APIs.</p></div></details><details open><summary>4. Why Request Body?</summary><div class='content'><p>Instead of sending large amounts of information in the URL, modern APIs send structured JSON inside the request body.</p><p>Advantages:</p><p>Cleaner APIs </p><p>Better Security </p><p>Large Data Support </p><p>Easy Validation </p><p>Structured Data </p></div></details><details open><summary>5. What is Pydantic?</summary><div class='content'><p>Pydantic is a Python data validation and data parsing library used by FastAPI.</p><p>Its primary responsibility is to validate incoming request data before it reaches the application logic.</p><p>     6. What is BaseModel?</p><p>BaseModel is the fundamental class provided by Pydantic.</p><p>It defines the schema of incoming request data.</p><p>  Defines Request Schema </p><p>  Validates Input Data </p><p>  Converts JSON into Python Objects </p><p>  Generates Swagger Documentation </p><p>  Produces Validation Errors Automatically</p></div></details>
+<details open>
+<summary>GET vs POST</summary>
+<div class='content'>
+<table>
+<tr><th>GET</th><th>POST</th></tr>
+<tr><td>Retrieves data</td><td>Creates data</td></tr>
+<tr><td>Parameters in URL</td><td>Data in Request Body</td></tr>
+<tr><td>Bookmarkable</td><td>Not Bookmarkable</td></tr>
+<tr><td>Read Operation</td><td>Create Operation</td></tr>
+<tr><td>Idempotent</td><td>Not Idempotent</td></tr>
+</table>
+</div>
+</details>
+</div></body></html>
