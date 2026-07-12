@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day 6 - Request & Response Model</title>
+<style>
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#eef3f8}
+.container{max-width:1000px;margin:40px auto;background:#fff;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);overflow:hidden}
+header{background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;padding:30px}
+header h1{margin:0}
+.intro{padding:20px 30px;background:#f8fbff;border-bottom:1px solid #ddd}
+details{margin:18px 30px;border:1px solid #d7dee8;border-radius:10px;overflow:hidden}
+summary{padding:16px 18px;background:#2563eb;color:#fff;font-size:17px;font-weight:600;cursor:pointer}
+.content{padding:18px;line-height:1.8}
+code,pre{background:#f4f4f4;border-radius:6px;padding:2px 4px}
+table{border-collapse:collapse;width:100%;margin-top:10px}
+th,td{border:1px solid #ccc;padding:10px}
+th{background:#2563eb;color:#fff}
+.note{background:#fff8dc;border-left:5px solid #f59e0b;padding:12px;margin:12px 0}
+ul{padding-left:20px}
+</style>
+</head><body><div class="container">
+<header><h1>Day 6 - Request Model & Response Model</h1></header> 
+<details><summary>1. What is a Request Model?</summary><div class='content'>Answer<br>A Request Model is used to receive and validate data sent by the client before processing it.</div></details><details><summary>2. What is a Response Model?</summary><div class='content'>Answer<br>A Response Model is used to filter and control the data returned to the client while hiding sensitive information.</div></details><details><summary>3. Why should we use Response Models?</summary><div class='content'>To avoid exposing sensitive information like passwords, tokens, OTPs, emails, or internal fields.</div></details><details><summary>4. Difference between Request Model and Response Model?</summary><div class='content'><h4>Difference between Request Model and Response Model</h4>
+
+<div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; margin-top:15px; font-family:Arial, sans-serif;">
+        <thead>
+            <tr style="background:#2563eb; color:#fff;">
+                <th style="border:1px solid #ddd; padding:12px; text-align:left;">Request Model</th>
+                <th style="border:1px solid #ddd; padding:12px; text-align:left;">Response Model</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Used to receive data from the client.
+                </td>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Used to send data back to the client.
+                </td>
+            </tr>
+
+            <tr style="background:#f8f9fa;">
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Validates incoming request data.
+                </td>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Filters and controls outgoing response data.
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Converts JSON into a Python object.
+                </td>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Converts a Python object into the required JSON response.
+                </td>
+            </tr>
+
+            <tr style="background:#f8f9fa;">
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Prevents invalid data from entering the application.
+                </td>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Prevents sensitive or unnecessary data from being exposed.
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Connected through the function parameter.
+                </td>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Connected through the <code>response_model</code> parameter in the decorator.
+                </td>
+            </tr>
+
+            <tr style="background:#f8f9fa;">
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Used before business logic is executed.
+                </td>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Used after business logic is executed.
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div></div></details><details><summary>5. Which Status Code should be returned after successful POST?</summary><div class='content'>201 Created</div></details><details><summary>6. Why does FastAPI return 422?</summary><div class='content'>Because the client sends invalid data that does not match the validation rules defined in the Pydantic model.</div></details><details><summary>7. Real-Life Example</summary><div class='content'>Registration API<br>Client Request<br>{<br>"name":"Vipin",<br>"email":"vipin@gmail.com",<br>"password":"123456"<br>}<br>Database stores all fields.<br>Client Response<br>{<br>"name":"Vipin",<br>"email":"vipin@gmail.com"<br>}<br>Password is hidden using the Response Model.</div></details><details><summary>8. Key Points</summary><div class='content'>Request Model receives and validates client data.<br>Response Model filters response data.<br>Never expose passwords or sensitive information.<br>Use 200 OK for successful GET requests.<br>Use 201 Created for successful POST requests.<br>422 Validation Error occurs when request data does not match the expected validation rules.</div></details>
+</div></body></html>
