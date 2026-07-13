@@ -1,0 +1,88 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>HTTPException- Day7</title><style>
+body{font-family:Segoe UI,Arial;background:#eef2f7;padding:30px}
+.wrap{max-width:1000px;margin:auto;background:#fff;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.15)}
+header{background:#2563eb;color:#fff;padding:25px}
+details{margin:16px;border:1px solid #ccc;border-radius:8px}
+summary{background:#2563eb;color:#fff;padding:14px;font-weight:bold;cursor:pointer}
+.content{padding:16px;line-height:1.7}
+pre{background:#272822;color:#fff;padding:10px;border-radius:6px;overflow:auto}
+</style></head><body><div class='wrap'><header><h1>Day 7 - HTTPException</h1></header><details><summary>1. What is HTTPException?</summary><div class='content'><p>Answer</p><p>HTTPException is used to return custom HTTP error responses from a FastAPI application. It allows us to send an appropriate status code and error message to the client.</p></div></details><details><summary>2. Why do we use HTTPException?</summary><div class='content'><p>Answer</p><p>We use HTTPException to handle errors professionally and return meaningful HTTP status codes instead of returning normal JSON responses.</p></div></details><details><summary>3. Syntax of HTTPException</summary><div class='content'><pre>from fastapi import HTTPException
+raise HTTPException(
+status_code=404,
+detail="Student Not Found"
+</pre><p>)</p></div></details><details><summary>4. Why do we use raise instead of return?</summary><div class='content'><p>Answer</p><pre>return sends normal data and usually returns 200 OK.
+raise HTTPException immediately stops the execution and returns the specified error status code.
+</pre></div></details><details><summary>5. What is the difference between return and raise?</summary><div class='content'><h4>Difference between <code>return</code> and <code>raise</code></h4>
+
+<div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; margin-top:15px; font-family:Arial, sans-serif;">
+        <thead>
+            <tr style="background:#2563eb; color:#fff;">
+                <th style="border:1px solid #ddd; padding:12px; text-align:left;">return</th>
+                <th style="border:1px solid #ddd; padding:12px; text-align:left;">raise</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Returns data.
+                </td>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Raises an exception.
+                </td>
+            </tr>
+
+            <tr style="background:#f8f9fa;">
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Normal execution continues.
+                </td>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Execution stops immediately.
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Usually returns <strong>200 OK</strong>.
+                </td>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Returns a custom HTTP status code (e.g. <strong>404</strong>, <strong>401</strong>, <strong>403</strong>, <strong>500</strong>).
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div></div></details><details><summary>6. What happens if we use return instead of raise?</summary><div class='content'><p>Example</p><pre>return {
+</pre><p>"message": "Student Not Found"</p><p>}</p><p>Output</p><p>200 OK</p><p>This is not a professional API because the client thinks the request was successful.</p></div></details><details><summary>7. Which status code should be used if a resource is not found?</summary><div class='content'><p>Answer</p><p>404 Not Found</p><p>Example</p><pre>/student/100
+</pre><p>If Student ID 100 does not exist, return 404 Not Found.</p></div></details><details><summary>8. Difference between 404 and 422?</summary><div class='content'><h4>Difference between <code>404 Not Found</code> and <code>422 Validation Error</code></h4>
+
+<div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; margin-top:15px; font-family:Arial, sans-serif;">
+        <thead>
+            <tr style="background:#2563eb; color:#fff;">
+                <th style="border:1px solid #ddd; padding:12px; text-align:left;">404 Not Found</th>
+                <th style="border:1px solid #ddd; padding:12px; text-align:left;">422 Validation Error</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Resource does not exist.
+                </td>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Invalid request data.
+                </td>
+            </tr>
+
+            <tr style="background:#f8f9fa;">
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Student not found.
+                </td>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Wrong data type or validation failure.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div></div></details></div></body></html>
