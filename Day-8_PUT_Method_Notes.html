@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Day 8 PUT Method</title>
+<style>
+body{font-family:Segoe UI,Arial;background:#eef2f7;margin:0}
+.wrap{max-width:980px;margin:30px auto;background:#fff;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.15);overflow:hidden}
+header{background:linear-gradient(135deg,#2563eb,#1e3a8a);color:#fff;padding:24px}
+details{margin:18px;border:1px solid #ddd;border-radius:8px}
+summary{background:#2563eb;color:#fff;padding:14px;font-weight:bold;cursor:pointer}
+.content{padding:16px;line-height:1.8}
+pre{background:#f5f5f5;padding:10px;border-radius:6px;overflow:auto}
+</style></head><body><div class='wrap'><header><h1>Day 8 - PUT Method</h1></header><details><summary>1. What is the PUT Method?</summary><div class='content'><p>Answer</p><p>PUT method is used to update an existing resource on the server.</p><p>PUT method ka use server par existing data ko update karne ke liye hota hai.</p></div></details><details><summary>2. Why do we use the PUT Method?</summary><div class='content'><p>Answer</p><p>We use the PUT method when an existing record needs to be modified or updated.</p><p>Example:</p><p>Update Student</p><p>Update Employee</p><p>Update Product</p><p>Update User Profile</p></div></details><details><summary>3. Syntax of PUT Method</summary><div class='content'><pre>@app.put(&quot;/student/{id}&quot;)</pre><p>def update_student(id: int, student: Student):</p><p>return student</p></div></details><details><summary>4. Difference between POST and PUT</summary><div class='content'><div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; margin-top:15px; font-family:Arial, sans-serif;">
+        <thead>
+            <tr style="background:#2563eb; color:#fff;">
+                <th style="border:1px solid #ddd; padding:12px; text-align:left;">POST</th>
+                <th style="border:1px solid #ddd; padding:12px; text-align:left;">PUT</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Creates a new resource.
+                </td>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Updates an existing resource.
+                </td>
+            </tr>
+
+            <tr style="background:#f8f9fa;">
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Used for Insert.
+                </td>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Used for Update.
+                </td>
+            </tr>
+
+            <tr>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Example: Add Student.
+                </td>
+                <td style="border:1px solid #ddd; padding:12px;">
+                    Example: Update Student.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div></div></details><details><summary>5. Why do we use Path Parameter with PUT?</summary><div class='content'><p>Answer</p><p>The Path Parameter identifies which resource should be updated.</p><p>Example</p><p>PUT /student/1</p><p>Here, 1 is the Student ID to update.</p></div></details><details><summary>6. What happens if the resource does not exist?</summary><div class='content'><p>Answer</p><p>Return:</p><p>404 Not Found</p><p>Example</p><pre>raise HTTPException(</pre><p>status_code=404,</p><p>detail=&quot;Student Not Found&quot;</p><p>)</p></div></details><details><summary>7. What is the Request Body in PUT?</summary><div class='content'><p>Answer</p><p>The Request Body contains the updated data sent by the client.</p><p>Example</p><pre>{</pre><p>&quot;name&quot;:&quot;Vipin&quot;,</p><p>&quot;age&quot;:31,</p><p>&quot;course&quot;:&quot;AI Engineer&quot;</p><p>}</p></div></details><details><summary>8. Why do we use Pydantic in PUT?</summary><div class='content'><p>Answer</p><p>Pydantic validates the incoming data before updating the resource.</p><p>If invalid data is received, FastAPI automatically returns:</p><p>422 Validation Error</p></div></details><details><summary>9. Why do we use model_dump()?</summary><div class='content'><p>Answer</p><p>model_dump() converts the Pydantic model into a Python dictionary.</p><p>Example</p><pre>students[id] = student.model_dump()</pre></div></details></div></body></html>
