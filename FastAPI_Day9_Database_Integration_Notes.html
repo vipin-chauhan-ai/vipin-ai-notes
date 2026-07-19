@@ -1,0 +1,161 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>FastAPI Day 9 Notes</title><style>
+body{font-family:Arial;background:#f4f6f9;padding:20px}
+h1{text-align:center;color:#1e3a8a}
+details{background:#fff;margin:10px 0;border-radius:8px;padding:10px;box-shadow:0 2px 5px rgba(0,0,0,.1)}
+summary{font-weight:bold;font-size:18px;cursor:pointer}
+pre{white-space:pre-wrap;font-family:Arial}
+table{border-collapse:collapse}td,th{border:1px solid #ccc;padding:6px}
+</style></head><body><h1>FastAPI Day 9 - Database Integration (SQLAlchemy + SQLite)</h1>
+<details><summary>1. What is SQLite?</summary><pre>Answer
+SQLite is a lightweight, file-based relational database. It stores the entire database, including tables and records, inside a single .db file. It does not require a separate database server.
+Hindi:
+SQLite ek lightweight, file-based relational database hai jo poora database ek .db file me store karta hai. Iske liye alag server ki zarurat nahi hoti.</pre></details>
+<details><summary>2. What is SQLAlchemy?</summary><pre>Answer
+SQLAlchemy is a Python ORM (Object Relational Mapper) library that allows developers to interact with databases using Python objects instead of writing raw SQL queries.
+Hindi:
+SQLAlchemy ek Python ORM library hai jo Python objects ke through database operations karne ki suvidha deti hai.</pre></details>
+<details><summary>3. Difference between SQLite and SQLAlchemy?</summary><pre>
+
+<table border="1" cellpadding="10" cellspacing="0" style="width:100%; border-collapse:collapse; text-align:left;">
+    <thead style="background:#007bff; color:white;">
+        <tr>
+            <th>SQLite</th>
+            <th>SQLAlchemy</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>It is a relational database.</td>
+            <td>It is a Python ORM (Object Relational Mapper) library.</td>
+        </tr>
+        <tr>
+            <td>Stores data inside a <code>.db</code> file.</td>
+            <td>Communicates with the database using Python objects.</td>
+        </tr>
+        <tr>
+            <td>Responsible for storing tables and records.</td>
+            <td>Responsible for generating SQL queries automatically.</td>
+        </tr>
+        <tr>
+            <td>Works as the database.</td>
+            <td>Works as a bridge between Python and the database.</td>
+        </tr>
+    </tbody>
+</table></pre></details>
+<details><summary>4. What is ORM?</summary><pre>Answer
+ORM (Object Relational Mapper) is a technique that maps programming language objects to database tables. It allows developers to perform database operations without writing raw SQL.
+Hindi:
+ORM ek technique hai jo Python objects ko database tables se map karti hai.</pre></details>
+<details><summary>5. Why do we use ORM?</summary><pre>Answer
+Reduces raw SQL writing.
+Improves code readability.
+Supports multiple databases.
+Makes code easier to maintain.</pre></details>
+<details><summary>6. What is DATABASE_URL?</summary><pre>Answer
+DATABASE_URL is a connection string that tells SQLAlchemy which database to connect to and how to connect.
+Example:
+DATABASE_URL = &quot;sqlite:///students.db&quot;</pre></details>
+<details><summary>7. What is create_engine()?</summary><pre>Answer
+create_engine() creates and manages the database connection between SQLAlchemy and the database.
+Example:
+engine = create_engine(DATABASE_URL)</pre></details>
+<details><summary>8. Does create_engine() create database tables?</summary><pre>Answer
+No.
+create_engine() only prepares the database connection.
+Database tables are created later using:
+Base.metadata.create_all(bind=engine)</pre></details>
+<details><summary>9. What is Session?</summary><pre>Answer
+Session is used to perform database operations such as:
+Create
+Read
+Update
+Delete</pre></details>
+<details><summary>10. What is sessionmaker()?</summary><pre>Answer
+sessionmaker() is a factory that creates Session objects.
+These Session objects are then used to perform CRUD operations.</pre></details>
+<details><summary>11. Difference between Engine and Session?</summary><pre>Answer</pre> 
+
+<table border="1" cellpadding="10" cellspacing="0" style="width:100%; border-collapse:collapse; text-align:left;">
+    <thead style="background:#007bff; color:white;">
+        <tr>
+            <th>Engine</th>
+            <th>Session</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Creates and manages the database connection.</td>
+            <td>Performs CRUD operations (Create, Read, Update, Delete).</td>
+        </tr>
+        <tr>
+            <td>Does not execute CRUD operations directly.</td>
+            <td>Executes database operations using the Engine.</td>
+        </tr>
+        <tr>
+            <td>Created once and reused throughout the application.</td>
+            <td>Created when needed and used during database transactions.</td>
+        </tr>
+        <tr>
+            <td>Acts as the connection manager.</td>
+            <td>Acts as the communication layer between Python objects and the database.</td>
+        </tr>
+    </tbody>
+</table></details>
+<details><summary>12. Why can&#x27;t we use Engine directly?</summary><pre>Answer
+Engine is responsible for creating and managing the database connection.
+CRUD operations are performed through a Session object.</pre></details>
+<details><summary>13. What is autocommit=False?</summary><pre>Answer
+It means SQLAlchemy will not automatically save changes.
+The developer must explicitly call:
+db.commit()
+to permanently save data.</pre></details>
+<details><summary>14. What happens if the application crashes before db.commit()?</summary><pre>Answer
+The data will not be permanently saved because the transaction has not been committed.</pre></details>
+<details><summary>15. What is autoflush=False?</summary><pre>Answer
+It prevents SQLAlchemy from automatically flushing pending changes before executing queries.
+It gives full control to the developer.</pre></details>
+<details><summary>16. Difference between Flush and Commit?</summary><pre></pre>
+
+<table border="1" cellpadding="10" cellspacing="0" style="width:100%; border-collapse:collapse; text-align:left;">
+    <thead style="background:#007bff; color:white;">
+        <tr>
+            <th>Flush</th>
+            <th>Commit</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Temporary synchronization with the database.</td>
+            <td>Permanently saves data to the database.</td>
+        </tr>
+        <tr>
+            <td>Changes can still be rolled back.</td>
+            <td>Changes cannot be rolled back after commit.</td>
+        </tr>
+        <tr>
+            <td>Does not permanently store data.</td>
+            <td>Permanently stores data.</td>
+        </tr>
+    </tbody>
+</table></details>
+<details><summary>17. What is declarative_base()?</summary><pre>Answer
+declarative_base() creates the base class for all ORM models.
+Any class inheriting from Base is treated as a database table.
+Example:
+class Student(Base):</pre></details>
+<details><summary>18. What is Base.metadata.create_all(bind=engine)?</summary><pre>Answer
+It creates all database tables defined by ORM models.
+If the SQLite database file does not exist, it is created automatically.</pre></details>
+<details><summary>19. Can SQLAlchemy work with MySQL and PostgreSQL?</summary><pre>Answer
+Yes.
+SQLAlchemy supports multiple databases including:
+SQLite
+MySQL
+PostgreSQL
+Oracle
+SQL Server
+Usually, only the database connection URL and the required database driver need to be changed.</pre></details>
+<details><summary>20. If we switch from SQLite to PostgreSQL, do we rewrite the whole application?</summary><pre>Answer
+No.
+Generally, we only change the DATABASE_URL and install the appropriate PostgreSQL driver. Most of the SQLAlchemy ORM code remains the same.</pre></details>
+</body></html>
