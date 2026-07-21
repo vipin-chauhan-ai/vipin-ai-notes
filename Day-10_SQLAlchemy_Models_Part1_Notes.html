@@ -1,0 +1,77 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>Day 10 - SQLAlchemy Models (Part 1)</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f6f9;margin:40px}
+.container{max-width:950px;margin:auto;background:#fff;padding:25px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+h1{color:#0b5ed7}
+details{margin:12px 0;border:1px solid #ddd;border-radius:6px}
+summary{padding:12px;font-weight:bold;background:#eef5ff;cursor:pointer}
+.content{padding:14px;white-space:pre-wrap;line-height:1.6}
+</style></head><body><div class="container">
+<h1>📘 Day 10 - SQLAlchemy Models (Part 1)</h1>
+<p>Questions & Answers</p>
+<details><summary>Q1. Why do we inherit Base?</summary><div class='content'>Base is the parent class for all SQLAlchemy ORM models. Any class that inherits from Base is treated as a database table.</div></details><details><summary>Q2. What happens if we don&#x27;t inherit from Base?</summary><div class='content'>The class becomes a normal Python class. SQLAlchemy will not recognize it as an ORM model, so no database table will be created.</div></details><details><summary>Q3. What is __tablename__?</summary><div class='content'>__tablename__ specifies the name of the database table that SQLAlchemy should create.
+Example:
+__tablename__ = &quot;students&quot;</div></details><details><summary>Q4. Can the class name and table name be different?</summary><div class='content'>Yes.
+Example:
+class Student(Base):
+__tablename__ = &quot;college_students&quot;
+Class Name:
+Student
+Table Name:
+college_students</div></details><details><summary>Q5. What is primary_key=True?</summary><div class='content'>It marks a column as the Primary Key. A primary key uniquely identifies each record in the table.</div></details><details><summary>Q6. What happens if we don&#x27;t define a Primary Key?</summary><div class='content'>SQLAlchemy cannot uniquely identify records. Every ORM model should have at least one primary key; otherwise SQLAlchemy raises an error while mapping the model.</div></details><details><summary>Q7. Difference between int and Integer?</summary><div class='content'><table border="1" cellpadding="10" cellspacing="0" width="100%" style="border-collapse: collapse; text-align: left;">
+    <tr style="background-color: #f2f2f2;">
+        <th>int</th>
+        <th>Integer</th>
+    </tr>
+    <tr>
+        <td>Python Data Type</td>
+        <td>SQLAlchemy Data Type</td>
+    </tr>
+    <tr>
+        <td>Used in Python Code</td>
+        <td>Used in Database Columns</td>
+    </tr>
+</table></div></details><details><summary>Q8. Difference between str and String?</summary><div class='content'>
+<table border="1" cellpadding="10" cellspacing="0" width="100%" style="border-collapse: collapse; text-align: left;">
+    <tr style="background-color:#f2f2f2;">
+        <th>int</th>
+        <th>Integer</th>
+    </tr>
+    <tr>
+        <td>Python Data Type</td>
+        <td>SQLAlchemy Data Type</td>
+    </tr>
+    <tr>
+        <td>Used in Python Code</td>
+        <td>Used in Database Columns</td>
+    </tr>
+</table></div></details><details>
+    <summary>Q9. Difference between <code>name: str</code> and <code>name = Column(String)</code>?</summary>
+
+    <div class="content">
+
+        <table border="1" cellpadding="10" cellspacing="0" width="100%" style="border-collapse: collapse; text-align: left;">
+            <tr style="background-color:#f2f2f2;">
+                <th><code>name: str</code></th>
+                <th><code>name = Column(String)</code></th>
+            </tr>
+
+            <tr>
+                <td>Python Type Annotation</td>
+                <td>SQLAlchemy ORM Column</td>
+            </tr>
+
+            <tr>
+                <td>Used in Pydantic</td>
+                <td>Used in SQLAlchemy</td>
+            </tr>
+
+            <tr>
+                <td>Validates API Request</td>
+                <td>Creates Database Column</td>
+            </tr>
+        </table>
+
+    </div>
+</details><details><summary>Q10. What does Base.metadata.create_all(bind=engine) do?</summary><div class='content'>It creates all database tables defined by SQLAlchemy ORM models. If the SQLite database file does not exist, it creates it automatically.</div></details><details><summary>Q11. What happens if we remove Base.metadata.create_all(bind=engine)?</summary><div class='content'>The application may start successfully, but SQLAlchemy will not create the database tables. When we try to perform CRUD operations, an error occurs because the required table does not exist.</div></details><details><summary>Q12. Why do we write import models?</summary><div class='content'>import models loads all ORM models into memory. This registers them with Base. Without importing the models, Base.metadata.create_all() does not know which tables to create.</div></details><details><summary>Q13. What happens if we remove import models?</summary><div class='content'>The application starts successfully, but no database tables are created because SQLAlchemy does not know about the ORM models.</div></details></div></body></html>
