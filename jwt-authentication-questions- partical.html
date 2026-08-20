@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FastAPI JWT Authentication questions and answers for beginners.">
+  <title>JWT Authentication Questions and Answers |</title>
+  <style>
+    :root {
+      --navy: #0b1f3a;
+      --blue: #2563eb;
+      --blue-light: #eff6ff;
+      --ink: #14213d;
+      --muted: #5f6f86;
+      --line: #dce5f1;
+      --white: #ffffff;
+      --shadow: 0 12px 35px rgba(15, 35, 64, .10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background: #f5f8fc;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    .hero {
+      padding: 64px 20px 84px;
+      color: var(--white);
+      text-align: center;
+      background: radial-gradient(circle at 20% 10%, #1c5fcc 0, transparent 34%), linear-gradient(135deg, #07152b, #123d78);
+    }
+    .badge {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 5px 13px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 999px;
+      color: #dbeafe;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .09em;
+    }
+    h1 {
+      max-width: 800px;
+      margin: 0 auto 12px;
+      font-size: clamp(2rem, 5vw, 3.35rem);
+      line-height: 1.15;
+    }
+    .hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      color: #d7e6ff;
+      font-size: clamp(1rem, 2vw, 1.14rem);
+    }
+
+    main { max-width: 940px; margin: -42px auto 0; padding: 0 20px 54px; }
+    .intro {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+    .intro strong { color: var(--blue); }
+    .intro span { color: var(--muted); font-size: .95rem; }
+
+    .accordion { display: grid; gap: 12px; }
+    details {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--white);
+      box-shadow: 0 4px 14px rgba(15, 35, 64, .04);
+      transition: border-color .2s, box-shadow .2s;
+    }
+    details[open] { border-color: #93b9f7; box-shadow: 0 9px 24px rgba(37, 99, 235, .10); }
+    summary {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 19px 20px;
+      cursor: pointer;
+      list-style: none;
+      font-size: 1.02rem;
+      font-weight: 750;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "+";
+      margin-left: auto;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      color: var(--blue);
+      background: var(--blue-light);
+      text-align: center;
+      font-size: 1.35rem;
+      font-weight: 400;
+      line-height: 26px;
+    }
+    details[open] summary::after { content: "−"; }
+    .number {
+      flex: 0 0 auto;
+      display: grid;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      border-radius: 9px;
+      color: var(--white);
+      background: var(--blue);
+      font-size: .78rem;
+    }
+    .answer {
+      padding: 0 66px 22px;
+      color: #33435d;
+    }
+    .answer p { margin: 0 0 12px; }
+    .answer p:last-child { margin-bottom: 0; }
+    code, pre {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+    code {
+      padding: 2px 6px;
+      border-radius: 5px;
+      color: #164eaf;
+      background: #edf4ff;
+      font-size: .92em;
+    }
+    pre {
+      overflow-x: auto;
+      margin: 12px 0 0;
+      padding: 14px 16px;
+      border-radius: 10px;
+      color: #dcecff;
+      background: #10233f;
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+    footer {
+      padding: 22px 20px 30px;
+      color: #6b7a90;
+      text-align: center;
+      font-size: .9rem;
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 48px 18px 66px; }
+      main { padding: 0 13px 35px; }
+      .intro { padding: 18px; }
+      summary { padding: 16px 14px; gap: 10px; font-size: .95rem; }
+      .answer { padding: 0 16px 18px; font-size: .95rem; }
+      .number { width: 28px; height: 28px; border-radius: 8px; }
+      pre { padding: 12px; font-size: .82rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="badge">FASTAPI • DAY </div>
+    <h1>JWT Authentication Questions &amp; Answers</h1>
+    <p>Understand JWT authentication, token expiry, SECRET_KEY, and Bearer tokens in simple language.</p>
+  </header>
+
+  <main>
+    <section class="intro" aria-label="Page introduction">
+      <strong>16 Important JWT Questions</strong>
+      <span>Click any question to view its answer.</span>
+    </section>
+
+    <section class="accordion" aria-label="JWT questions and answers">
+      <details>
+        <summary><span class="number">Q1</span> Why do we use SECRET_KEY?</summary>
+        <div class="answer"><p><code>SECRET_KEY</code> is used to digitally sign the JWT token. It helps verify that the token has not been modified or tampered with.</p></div>
+      </details>
+      <details>
+        <summary><span class="number">Q2</span> What happens if someone knows our SECRET_KEY?</summary>
+        <div class="answer"><p>If an attacker knows the <code>SECRET_KEY</code>, they can create fake JWT tokens. Therefore, the key must always remain private and should never be exposed publicly.</p></div>
+      </details>
+      <details>
+        <summary><span class="number">Q3</span> Why do we use ALGORITHM = "HS256"?</summary>
+        <div class="answer"><p><code>HS256</code> is the hashing algorithm used to sign and verify JWT tokens. It helps ensure the integrity of the token.</p></div>
+      </details>
+      <details>
+        <summary><span class="number">Q4</span> Why do we set ACCESS_TOKEN_EXPIRE_MINUTES?</summary>
+        <div class="answer"><p>It defines how long the JWT token remains valid. After its expiration time, the token becomes invalid and the user must log in again.</p></div>
+      </details>
+      <details>
+        <summary><span class="number">Q5</span> Why do we create create_access_token()?</summary>
+        <div class="answer"><p>This function generates a JWT token by adding user information and an expiration time, then digitally signing it using the <code>SECRET_KEY</code>.</p></div>
+      </details>
+      <details>
+        <summary><span class="number">Q6</span> Why is the data parameter a dictionary?</summary>
+        <div class="answer"><p>A JWT payload can contain multiple pieces of information (claims), such as email, user ID, role, and expiration time. A dictionary stores these as key-value pairs.</p><pre>{
+  "sub": "vipin@gmail.com",
+  "role": "admin",
+  "user_id": 1
+}</pre></div>
+      </details>
+      <details>
+        <summary><span class="number">Q7</span> Why do we use data.copy()?</summary>
+        <div class="answer"><p><code>data.copy()</code> creates a copy of the original dictionary. This lets us modify the copied data without changing the original payload.</p></div>
+      </details>
+      <details>
+        <summary><span class="number">Q8</span> Why do we use datetime.utcnow()?</summary>
+        <div class="answer"><p>It returns the current UTC time, which is used as the reference time when calculating the JWT token's expiration.</p></div>
+      </details>
+      <details>
+        <summary><span class="number">Q9</span> Why do we use timedelta()?</summary>
+        <div class="answer"><p><code>timedelta()</code> adds a specific duration, such as minutes, hours, or days, to the current time. It is used to calculate the token's expiration time.</p></div>
+      </details>
+      <details>
+        <summary><span class="number">Q10</span> Why do we add "exp" to the payload?</summary>
+        <div class="answer"><p>The <code>exp</code> claim stores the JWT token's expiration time. Once the token expires, it becomes invalid and cannot be used for authentication.</p></div>
+      </details>
+      <details>
+        <summary><span class="number">Q11</span> What does to_encode.update({"exp": expire}) do?</summary>
+        <div class="answer"><p>It adds the expiration time (<code>exp</code>) to the JWT payload before generating the token.</p><pre>Before:
+{
+  "sub": "vipin@gmail.com"
+}
+
+After:
+{
+  "sub": "vipin@gmail.com",
+  "exp": "2026-08-06 01:30:00"
+}</pre></div>
+      </details>
+      <details>
+        <summary><span class="number">Q12</span> What does jwt.encode() do?</summary>
+        <div class="answer"><p><code>jwt.encode()</code> converts the payload into a digitally signed JWT token using the <code>SECRET_KEY</code> and the selected algorithm.</p></div>
+      </details>
+      <details>
+        <summary><span class="number">Q13</span> What does jwt.encode() return?</summary>
+        <div class="answer"><p>It returns an encoded JWT token as a string.</p><pre>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</pre></div>
+      </details>
+      <details>
+        <summary><span class="number">Q14</span> Why do we return the encoded JWT token?</summary>
+        <div class="answer"><p>The client stores this token and sends it with future requests to access protected APIs.</p></div>
+      </details>
+      <details>
+        <summary><span class="number">Q15</span> Why don't we return only "Login Successful"?</summary>
+        <div class="answer"><p>A success message cannot be used for authentication. The client needs the JWT token to access protected routes.</p></div>
+      </details>
+      <details>
+        <summary><span class="number">Q16</span> Why do we return token_type = "bearer"?</summary>
+        <div class="answer"><p>It tells the client that the JWT token must be sent in the HTTP Authorization header using the Bearer scheme.</p><pre>Authorization: Bearer eyJhbGciOiJIUzI1NiIs...</pre></div>
+      </details>
+    </section>
+  </main>
+
+  <footer>FastAPI JWT Authentication • Day 11</footer>
+</body>
+</html>
