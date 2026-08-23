@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JWT Token Expiry & Refresh Token Notes | FastAPI</title>
+  <style>
+    :root { --navy:#102a43; --blue:#1d72d8; --light:#f3f7fb; --border:#d8e2ef; --text:#243b53; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Arial, Helvetica, sans-serif; background:var(--light); color:var(--text); line-height:1.6; }
+    .container { width:min(900px, calc(100% - 32px)); margin:36px auto; }
+    .hero { background:linear-gradient(135deg, #102a43, #1d72d8); color:#fff; padding:34px 28px; border-radius:16px; box-shadow:0 10px 28px rgba(16,42,67,.18); }
+    h1 { margin:0 0 8px; font-size:clamp(1.6rem, 4vw, 2.3rem); }
+    .hero p { margin:0; opacity:.94; }
+    .intro { background:#fff; margin:20px 0; padding:18px 20px; border-left:4px solid var(--blue); border-radius:8px; }
+    details { background:#fff; border:1px solid var(--border); border-radius:10px; margin:12px 0; overflow:hidden; }
+    summary { cursor:pointer; padding:16px 18px; font-weight:700; color:var(--navy); list-style:none; position:relative; }
+    summary::-webkit-details-marker { display:none; }
+    summary::after { content:'+'; position:absolute; right:18px; font-size:1.35rem; color:var(--blue); }
+    details[open] summary::after { content:'−'; }
+    .content { padding:0 18px 18px; border-top:1px solid var(--border); }
+    h2 { font-size:1.1rem; color:var(--navy); margin:18px 0 7px; }
+    ul, ol { padding-left:22px; margin:8px 0; }
+    pre { overflow:auto; background:#102a43; color:#eaf4ff; padding:14px; border-radius:8px; font-size:.92rem; }
+    code { font-family:Consolas, Monaco, monospace; }
+    .flow { background:#eaf4ff; border:1px solid #bed9f7; padding:14px; border-radius:8px; white-space:pre-line; }
+    .warning { background:#fff4e5; border-left:4px solid #e67e22; padding:12px 14px; border-radius:6px; }
+    footer { text-align:center; color:#627d98; font-size:.9rem; padding:10px 0 28px; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="hero">
+      <h1>JWT Token Expiry & Refresh Token</h1>
+      <p>Simple FastAPI notes for Access Token expiry and Refresh Token flow.</p>
+    </section>
+
+    <p class="intro">Click any topic to open it. First understand Token Expiry, then learn how a Refresh Token creates a new Access Token.</p>
+
+    <details open>
+      <summary>1. What is JWT Token Expiry?</summary>
+      <div class="content">
+        <p>Token expiry means a JWT token works only for a limited time. After that time, the server rejects it.</p>
+        <div class="flow">Login → Access Token created → Token expires after the configured time</div>
+        <pre><code>ACCESS_TOKEN_EXPIRE_MINUTES = 30</code></pre>
+        <p>In this example, the Access Token is valid for 30 minutes.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>2. Why do we use Token Expiry?</summary>
+      <div class="content">
+        <ul>
+          <li>A stolen token cannot be used forever.</li>
+          <li>It improves API security.</li>
+          <li>The user must get a new valid token after expiry.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>3. How is expiry added to a JWT?</summary>
+      <div class="content">
+        <p>The <code>exp</code> claim stores the expiry date and time inside the JWT payload.</p>
+        <pre><code>expire = datetime.utcnow() + timedelta(
+    minutes=ACCESS_TOKEN_EXPIRE_MINUTES
+)
+
+to_encode.update({"exp": expire})</code></pre>
+      </div>
+    </details>
+
+    <details>
+      <summary>4. What happens when the token expires?</summary>
+      <div class="content">
+        <p>The protected API returns:</p>
+        <pre><code>{
+  "detail": "Token has expired"
+}</code></pre>
+        <p>Status code: <code>401 Unauthorized</code></p>
+      </div>
+    </details>
+
+    <details>
+      <summary>5. What is a Refresh Token?</summary>
+      <div class="content">
+        <p>A Refresh Token is used to get a new Access Token after the Access Token expires.</p>
+        <pre><code>Access Token  → Short life, for example 30 minutes
+Refresh Token → Long life, for example 7 days</code></pre>
+      </div>
+    </details>
+
+    <details>
+      <summary>6. Why do we need a Refresh Token?</summary>
+      <div class="content">
+        <p>Without a Refresh Token, the user must login again after every Access Token expiry.</p>
+        <div class="flow">Access Token expires
+→ Client sends Refresh Token
+→ Server verifies Refresh Token
+→ Server returns a new Access Token
+→ User continues without logging in again</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>7. Refresh Token expiry time</summary>
+      <div class="content">
+        <pre><code>REFRESH_TOKEN_EXPIRE_DAYS = 7</code></pre>
+        <p>This means the Refresh Token can be used for 7 days. After that, the user must login again.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>8. Complete Access Token + Refresh Token Flow</summary>
+      <div class="content">
+        <ol>
+          <li>User logs in.</li>
+          <li>Server returns an Access Token and a Refresh Token.</li>
+          <li>Client calls <code>/profile</code> using the Access Token.</li>
+          <li>Access Token expires.</li>
+          <li>Client sends Refresh Token to <code>/refresh-token</code>.</li>
+          <li>Server verifies it and returns a new Access Token.</li>
+          <li>Client calls <code>/profile</code> again with the new Access Token.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>9. Access Token and Refresh Token must be different</summary>
+      <div class="content">
+        <div class="flow">/profile endpoint
+→ Only Access Token accepted
+
+/refresh-token endpoint
+→ Only Refresh Token accepted</div>
+        <p>Add token type in the payload:</p>
+        <pre><code># Access Token
+{
+  "sub": "user@email.com",
+  "type": "access"
+}
+
+# Refresh Token
+{
+  "sub": "user@email.com",
+  "type": "refresh"
+}</code></pre>
+      </div>
+    </details>
+
+    <details>
+      <summary>10. Important JWT Security Rule</summary>
+      <div class="content">
+        <p class="warning"><strong>Never store sensitive data inside a JWT payload.</strong> A JWT payload can be decoded, so it is not a safe place for secrets.</p>
+        <ul>
+          <li>Password</li>
+          <li>OTP</li>
+          <li>PIN</li>
+          <li>Secret key</li>
+          <li>Bank details</li>
+        </ul>
+      </div>
+    </details>
+
+    <footer>FastAPI JWT Authentication Notes</footer>
+  </main>
+</body>
+</html>
